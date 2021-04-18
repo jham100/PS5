@@ -11,21 +11,20 @@ const authToken = process.env.AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 const interval = 30000;
 const currentUrl = 'https://www.walmart.com/ip/Sony-PlayStation-5-Digital-Edition/493824815';
-// const currentUrl = 'https://www.walmart.com/ip/Sony-PlayStation-5-DualSense-Wireless-Controller/615549727';
 
 let index = 0;
 const notify = () => {
 client.messages
             .create({
                 body: `PS5 available at Walmart - ${currentUrl}` ,
-                from: '+19379155940',
-                to: '+18458939193'
+                from: '+xxxxxxxxxxx',
+                to: '+xxxxxxxxxxx'
             })
             console.log("CALLING");
             client.calls.create({
-            twiml: '<Say>Go get a PS5 at Target!</Say>',
-             to: '+18458939193',
-             from: '+19379155940'
+            twiml: '<Say>Go get a PS5 at Walmart!</Say>',
+             to: '+xxxxxxxxxxx',
+             from: '+xxxxxxxxxxx'
            })
         };
 
@@ -47,7 +46,7 @@ async function check_avail() {
         setTimeout(()=>{
             check_avail();
         },interval);
-        console.log("Could not buy a PS5. Fuck.")
+        console.log("Could not buy a PS5.")
     }
     return;
 })
@@ -70,14 +69,13 @@ async function check_avail() {
           setTimeout(()=>{
               check_avail();
           },interval);
-          console.log("Could not buy a PS5. Fuck.")
+          console.log("Could not buy a PS5.")
       }
       return;
   })
     .catch(error => {
-      console.error('Search failed:', error)
+      console.error('Search failed:', error);
     })
 }
 };
 check_avail();
-// setInterval(()=>check_avail(),10000);
